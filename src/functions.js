@@ -25,6 +25,16 @@ const readFile = (filename) => {
   })
 }
 
+const extractAllWords = (files) => {
+  let contents = []
+  files.forEach( (filename, index) => {
+    let content = fs.readFileSync(path.join(__dirname, '..', 'legendas', filename))
+    contents.push(content.toString().toLowerCase() + '<><><>')
+  })
+  return contents
+}
+
+
 const isSrtFiles = (filename) => {
   const splittedFileName = filename.split('.')
   return splittedFileName[splittedFileName.length -1].toLowerCase() === SRT_EXTENSION.toLowerCase()
@@ -70,5 +80,6 @@ module.exports = {
   getWords,
   processCountWords,
   sortByQuantity,
-  loadAllSubtitleFiles
+  loadAllSubtitleFiles,
+  extractAllWords
 }
